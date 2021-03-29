@@ -16,4 +16,24 @@
 
 """
 
+from sys import argv
+file_r = argv[1]
+file_w = argv[2]
+
 ignore = ["duplex", "alias", "configuration"]
+
+f_r = open(file_r, 'r')
+f_w = open(file_w, 'w')
+
+for line in f_r:
+    if line.startswith('!'):
+        continue
+    for key in ignore:
+        if key in line:
+            break
+    else:
+        f_w.write(line)
+f_w.close()
+#        print(*line.rstrip().split('\n'),)
+
+
