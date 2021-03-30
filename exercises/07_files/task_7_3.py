@@ -20,3 +20,10 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+with open('CAM_table.txt', 'r' ) as f:
+    for line in f:
+        if 'DYNAMIC' in line:
+            result = line.rstrip().split()
+            print('{:10}{:20}{:30}'.format(result[0], result[1], result[3]))
+

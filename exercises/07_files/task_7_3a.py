@@ -23,3 +23,12 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+result = []
+with open('CAM_table.txt', 'r' ) as f:
+    for line in f:
+        if 'DYNAMIC' in line:
+            result.append([int(line.split()[0]), line.split()[1], line.split()[3]])
+#            result.append([int(line.rstrip().split()[0]), line.rstrip().split()[1], line.rstrip().split()[3]])
+    for key in sorted(result):
+        print('{:<10} {:20} {:30}'.format(key[0], key[1], key[2]))
