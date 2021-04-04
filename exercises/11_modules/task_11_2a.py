@@ -73,6 +73,9 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+from pprint import pprint 
+from task_11_1 import parse_cdp_neighbors 
+from task_11_2 import create_network_map 
 
 infiles = [
     "sh_cdp_n_sw1.txt",
@@ -80,3 +83,15 @@ infiles = [
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
 ]
+
+topology = create_network_map(infiles)
+def unique_network_map(topology_dict):  
+    result = {}  
+    for key, value in topology_dict.items(): 
+        key, value = (sorted((key, value))) 
+        result.update({key : value}) 
+    return result 
+
+if __name__ == "__main__":
+    pprint(unique_network_map(topology) )
+
