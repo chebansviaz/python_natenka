@@ -93,5 +93,6 @@ def unique_network_map(topology_dict):
     return result 
 
 if __name__ == "__main__":
-    pprint(unique_network_map(topology) )
+    pprint(unique_network_map(topology))
+    draw_topology(unique_network_map(topology), output_filename='img/topology')
 
