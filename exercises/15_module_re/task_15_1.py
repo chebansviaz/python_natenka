@@ -23,3 +23,22 @@
 а не ввод пользователя.
 
 """
+import re
+def get_ip_from_cfg(router_cfg):
+    '''
+Функция get_ip_from_cfg ожидает как аргумент имя файла, в котором находится конфигурация устройства.
+
+Функция обрабатывает конфигурацию и возвращает IP-адреса и маски, которые настроены на интерфейсах, в виде списка кортежей:
+* первый элемент кортежа - IP-адрес
+* второй элемент кортежа - маска
+    '''
+    result = []
+    with open(router_cfg) as f:
+        for line in f.read().split('\n'):
+            if 'ip address' in line:
+                match = re.search(r'(\d+.\d+.\d+.\d+) (\d+.\d+.\d+.\d+)', line)
+                if match:
+                    result.append(match.groups())
+    return result
+print(get_ip_from_cfg("config_r1.txt"))
+
