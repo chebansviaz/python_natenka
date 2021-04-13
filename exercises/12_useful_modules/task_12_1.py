@@ -20,7 +20,7 @@ def ping_ip_addresses(list_ip_adress):
     alive = []
     unreachable = []
     for ip in list_ip_adress:
-        reply = subprocess.run(['ping', '-c', '3', '-n', ip])
+        reply = subprocess.run(['ping', '-c', '3', '-n', ip], stdout=subprocess.DEVNULL)
         if reply.returncode == 0:
             alive.append(ip)
         else:
