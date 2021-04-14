@@ -34,6 +34,7 @@
  '172.21.41.129', '172.21.41.130', '172.21.41.131', '172.21.41.132']
 
 """
+from pprint import pprint
 import ipaddress
 def convert_ranges_to_ip_list(list_ip_adress_ranges):
     list_ip = []
@@ -51,4 +52,5 @@ def convert_ranges_to_ip_list(list_ip_adress_ranges):
 
     return list_ip
 
-print(convert_ranges_to_ip_list(['8.8.4.4', '1.1.1.1-3', '172.21.41.128-172.21.41.132']))
+if __name__ == "__main__":
+    pprint(convert_ranges_to_ip_list(['8.8.4.4', '1.1.1.1-3', '172.21.41.128-172.21.41.132']))

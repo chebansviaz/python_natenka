@@ -18,3 +18,15 @@ Reachable    Unreachable
              10.1.1.9
 
 """
+from tabulate import tabulate
+
+reach = ['10.1.1.1', '10.1.1.2']
+unreach = ['10.1.1.7', '10.1.1.8', '10.1.1.9']
+def print_ip_table(list_reachable, list_unreachable):
+    result = tabulate({"Reachable" : list_reachable, "Unreachable" : list_unreachable}, headers="keys", stralign='center')
+    return result
+
+if __name__ == "__main__":
+    reach = ['10.1.1.1', '10.1.1.2']
+    unreach = ['10.1.1.7', '10.1.1.8', '10.1.1.9']
+    print(print_ip_table(reach, unreach))

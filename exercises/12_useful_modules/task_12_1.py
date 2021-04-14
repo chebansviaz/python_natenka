@@ -15,6 +15,7 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
 import subprocess
+from pprint import pprint
 
 def ping_ip_addresses(list_ip_adress):
     alive = []
@@ -26,6 +27,7 @@ def ping_ip_addresses(list_ip_adress):
         else:
             unreachable.append(ip)
 
-    return (alive, unreachable )
+    return (alive, unreachable)
 
-print(ping_ip_addresses(["8.8.8.8", "9.9.9.9", "192.168.7.1", "192.168.7.2"]))
+if __name__ == "__main__":
+    pprint(ping_ip_addresses(["8.8.8.8", "9.9.9.9", "192.168.7.1", "192.168.7.2"]))
