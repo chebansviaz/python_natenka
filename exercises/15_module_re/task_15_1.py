@@ -24,6 +24,7 @@
 
 """
 import re
+
 def get_ip_from_cfg(router_cfg):
     '''
 Функция get_ip_from_cfg ожидает как аргумент имя файла, в котором находится конфигурация устройства.
@@ -40,5 +41,7 @@ def get_ip_from_cfg(router_cfg):
                 if match:
                     result.append(match.groups())
     return result
-print(get_ip_from_cfg("config_r1.txt"))
+
+if __name__ == "__main__":
+    print(get_ip_from_cfg("config_r1.txt"))
 

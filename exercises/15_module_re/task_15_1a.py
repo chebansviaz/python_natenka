@@ -24,3 +24,16 @@
 а не ввод пользователя.
 
 """
+import re
+def get_ip_from_cfg(router_cfg):
+    result = {}
+    regex = (r'interface (?P<INTF>\S+).+'
+    with open(router_cfg) as f:
+        for line in f.read().split('!'):
+            if 'interface' in line and 'ip address' in line:
+                match = re.search(regex,line, re.DOTALL)
+                if match:
+                    result[match.group('INTF')] = (match.group('IP'), match.group('MASK'))
+    return result
+    if __name__ == "__main__":
+      print(get_ip_from_cfg("config_r1.txt"))
