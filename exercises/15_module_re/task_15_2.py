@@ -21,3 +21,20 @@
 Проверить работу функции на примере файла sh_ip_int_br.txt.
 
 """
+import re
+
+def parse_sh_ip_int_br(show_ip_int_br):
+    result = []
+    regex = (r'(\S+) +'
+             r'((?:(?:\d{1,3}.){3}\d)|unassigned) +'
+             r'.+?'
+             r'(up|down|administratively down) +'
+             r'(up|down)')
+    with open(show_ip_int_br) as f:
+        parse = re.finditer(regex, f.read())
+        for match in parse:
+            result.append(match.groups())
+    return result
+
+if __name__ == "__main__":
+    print(parse_sh_ip_int_br('sh_ip_int_br.txt'))
