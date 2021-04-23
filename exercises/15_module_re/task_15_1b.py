@@ -29,22 +29,38 @@ IP-адреса, диапазоны адресов и так далее, так 
 
 """
 import re
+
+#def get_ip_from_cfg(router_cfg):
+#    result = {}
+#    regex = re.compile(r'interface (?P<INTF>\S+)\n'
+#                       r'(.*\n)*'
+#                       r' ip address (?P<IP>\S+) (?P<MASK>\S+)\n'
+#                       r'( ip address (?P<IP_S>\S+) (?P<MASK_S>\S+) secondary)*')
+#    with open(router_cfg) as f:
+#        for line in f.read().split('!'):
+#            if 'interface' in line and 'ip address' in line:
+#                match = regex.search(line)
+#                if match:
+#                    if match.group('IP_S') == None:
+#                        result[match.group('INTF')] = [(match.group('IP'), match.group('MASK'))]
+#                    else:
+#                        result[match.group('INTF')] = [(match.group('IP'), match.group('MASK')), (match.group('IP_S'), match.group('MASK_S'))]
+#
+#    return result
+
 def get_ip_from_cfg(router_cfg):
     result = {}
-    regex = re.compile(r'interface (?P<INTF>\S+)\n'
-                       r'(.*\n)*'
-                       r' ip address (?P<IP>\S+) (?P<MASK>\S+)\n'
-                       r'( ip address (?P<IP_S>\S+) (?P<MASK_S>\S+) secondary)*')
+    reg_intf = r'interface (\S+)\n'
+    reg_addr = r'ip address (\S+) (\S+)'
     with open(router_cfg) as f:
         for line in f.read().split('!'):
             if 'interface' in line and 'ip address' in line:
-                match = regex.search(line)
-                if match:
-                    if match.group('IP_S') == None:
-                        result[match.group('INTF')] = [(match.group('IP'), match.group('MASK'))]
-                    else:
-                        result[match.group('INTF')] = [(match.group('IP'), match.group('MASK')), (match.group('IP_S'), match.group('MASK_S'))]
-
+                match_intf = re.search(reg_intf, line)
+                if match_intf:
+                    match_addr = re.findall(reg_addr, line)
+                    if match_addr:
+                        result[match_intf.group(1)] = match_addr
     return result
+
 if __name__ == "__main__":
     print(get_ip_from_cfg("config_r2.txt"))
