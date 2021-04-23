@@ -28,6 +28,7 @@ import re
 def get_ip_from_cfg(router_cfg):
     result = {}
     regex = (r'interface (?P<INTF>\S+).+'
+             r'ip address (?P<IP>\S+) (?P<MASK>\S+)')
     with open(router_cfg) as f:
         for line in f.read().split('!'):
             if 'interface' in line and 'ip address' in line:
@@ -35,5 +36,5 @@ def get_ip_from_cfg(router_cfg):
                 if match:
                     result[match.group('INTF')] = (match.group('IP'), match.group('MASK'))
     return result
-    if __name__ == "__main__":
-      print(get_ip_from_cfg("config_r1.txt"))
+if __name__ == "__main__":
+    print(get_ip_from_cfg("config_r1.txt"))
