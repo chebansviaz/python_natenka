@@ -36,7 +36,8 @@ import csv
 def write_dhcp_snooping_to_csv(filenames, output): 
     result = [] 
     headers = 'switch,mac,ip,vlan,interface' 
-    result.append(re.split(',', headers))
+    result.append(headers.split(','))
+#    result.append(re.split(',', headers))
     for file in filenames: 
         device = re.split('_', file)[0] 
         with open(file) as f: 
