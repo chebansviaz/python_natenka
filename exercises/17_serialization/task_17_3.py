@@ -29,9 +29,7 @@ def parse_sh_cdp_neighbors(line):
     result = {}
     result_value = {}
     regex = (r'(\S+)>|'
-             r'(\w+) +(\D+ \d+/\d+) .+ (Eth \d+/\d+)')
-#    reg_key = (r'(\S+)>)
-#    reg_data = (r'(\w+) +(\D+ \d+/\d+) .+ (Eth \d+/\d+)')
+             r'(\w+) +(\D+ \d+/\d+) .+ (\D+ \d+/\d+)')
     match = re.findall(regex, line)
     for dev, dev_id, intf, port in match:
         if dev:
