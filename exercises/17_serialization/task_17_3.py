@@ -24,3 +24,21 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Проверить работу функции на содержимом файла sh_cdp_n_sw1.txt
 """
+import re
+def parse_sh_cdp_neighbors(line):
+    result = {}
+    result_value = {}
+    regex = (r'(\S+)>|'
+             r'(\w+) +(\D+ \d+/\d+) .+ (Eth \d+/\d+)')
+#    reg_key = (r'(\S+)>)
+#    reg_data = (r'(\w+) +(\D+ \d+/\d+) .+ (Eth \d+/\d+)')
+    match = re.findall(regex, line)
+    for dev, dev_id, intf, port in match:
+        if dev:
+            result[dev] = result_value
+        elif dev_id and intf and port:
+            result_value.update({intf : {dev_id : port}})
+    return result
+if __name__ == "__main__":
+    with open("sh_cdp_n_sw1.txt") as f:
+        print(parse_sh_cdp_neighbors(f.read()))
