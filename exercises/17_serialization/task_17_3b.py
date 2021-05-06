@@ -43,3 +43,12 @@
 > pip install graphviz
 
 """
+import yaml
+from pprint import pprint
+
+def transform_topology(file):
+    with open(file) as f:
+        pprint(yaml.safe_load(f))
+
+if __name__ == "__main__":
+    transform_topology("topology.yaml")
