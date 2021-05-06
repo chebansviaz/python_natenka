@@ -47,8 +47,19 @@ import yaml
 from pprint import pprint
 
 def transform_topology(file):
+    result_all = {}
+    result = {}
     with open(file) as f:
-        pprint(yaml.safe_load(f))
+        topology = yaml.safe_load(f)
+        for dev, dev_val in topology.items():
+            for intf, intf_val in dev_val.items():
+                for dev_id, port in intf_val.items():
+                    result_all.update({(dev, intf) : (dev_id, port)})
+    for key, value in result_all.items():
+        key, value = (sorted((key, value)))
+        result.update({key : value})
+    return result
 
 if __name__ == "__main__":
-    transform_topology("topology.yaml")
+#    transform_topology("topology.yaml")
+#    draw_topology(transform_topology("topology.yaml"), output_filename='test')
