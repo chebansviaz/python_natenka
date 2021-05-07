@@ -45,6 +45,7 @@
 """
 import yaml
 from pprint import pprint
+from draw_network_graph import draw_topology
 
 def transform_topology(file):
     result_all = {}
@@ -61,5 +62,6 @@ def transform_topology(file):
     return result
 
 if __name__ == "__main__":
-#    transform_topology("topology.yaml")
-#    draw_topology(transform_topology("topology.yaml"), output_filename='test')
+    draw_topology(transform_topology("topology.yaml"))
+#    data = transform_topology("topology.yaml")
+#    draw_topology(data)
